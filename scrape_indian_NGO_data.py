@@ -1,5 +1,7 @@
+
 import requests
 from bs4 import BeautifulSoup
+import json
 import pprint
 
 url = "https://www.giveindia.org/certified-indian-ngos"
@@ -37,6 +39,8 @@ def NGO_data(soup):
 			state_list.append(c)
 	# print(state_list)
 	Dict_2={}
+	indian_NGO_data_list = []
+
 	for i in state_list:
 		list2=[]
 		for j in Dict_list:
@@ -44,7 +48,12 @@ def NGO_data(soup):
 				list2.append(j)
 		Dict_2[i]=list2
 	# return(Dict_2)
-	pprint.pprint(Dict_2)
+	indian_NGO_data_list.append(Dict_2)
+	pprint.pprint(indian_NGO_data_list)
+
+	with open("indian_NGO_data.json","w")as json_file:
+		json.dump(indian_NGO_data_list,json_file)
+
 
 
 NGO_data(url)
